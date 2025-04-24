@@ -1,11 +1,12 @@
 import { Container } from './style'
 import { useEffect } from 'react';
 
-useEffect(() => {
-    document.title = "Luma - cadastre-se";
-  }, []);  
 
 export function  RightImageSection() {
+    useEffect(() => {
+        document.title = "Luma - cadastre-se";
+      }, []);  
+      
     return (
         <Container className="Right-side">
           <div className="Right-image-section">

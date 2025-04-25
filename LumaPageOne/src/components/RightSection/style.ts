@@ -1,9 +1,9 @@
 import styled from "styled-components";
-import backgroundImage from '../../assets/RightWallpaper.png';
+import backgroundImage from '../../assets/RightWallpaper.png' // troque para a imagem do lado direito, se necessário
 
 export const Container = styled.section`
   width: 40%;
-  height: 100vh; /* corrigido de 100hv para 100vh */
+  height: 100vh; /* corrigido 'hv' para 'vh' */
   background-image: url(${backgroundImage});
   background-size: cover;
   background-position: center;

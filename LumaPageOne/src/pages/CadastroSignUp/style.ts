@@ -8,13 +8,13 @@ export const Container = styled.div`
   .leftContent {
     flex: 1;
     display: flex;
-    margin-top: 10px;
+    margin-top: 15px;
     margin-right: 300px;
     width: 100%;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 2rem;
+    padding: 1rem;
     background: #fff;
   }
 
@@ -23,7 +23,7 @@ export const Container = styled.div`
     margin-bottom: 1rem;
 
     h1 {
-      font-size: 3rem;
+      font-size: 45px;
       font-weight: 600;
     }
 
@@ -90,7 +90,7 @@ export const Container = styled.div`
   }
 
   button {
-    width: 100%;
+    width: 85%;
     height: 45px;
     background-color: ${props => props.theme['purple-100']};
     color: white;
@@ -125,14 +125,14 @@ export const Container = styled.div`
     text-align: center;
     font-size: 0.875rem;
     display: flex;
-    width: 404px;
+    width: 300px;
     flex-direction: column;
     justify-content: center;
 
     .registerTextArea {
       font-size: 0.875rem;
       color: ${props => props.theme['black']};
-      margin: 1rem 0;
+      margin: 0;
       justify-content: center;
       display: flex;
       align-items: center;
@@ -147,7 +147,7 @@ export const Container = styled.div`
 
   .loginLink span {
     font-size: 12px;
-    margin: 3rem 0;
+    margin: 1rem 0;
     justify-content: center;
   }
 
@@ -163,11 +163,11 @@ export const Container = styled.div`
   }
 
 .logoWrapper {
-  margin-bottom: 2rem;
-  align-self: center;
+      margin-top: 10px;
+      margin-left: 50px;
 
-  img {
-    width: 160px;
-  }
+      img {
+        width: 162px;
+   }
 }
 `;

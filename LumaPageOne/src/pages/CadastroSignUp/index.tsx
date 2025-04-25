@@ -15,10 +15,11 @@ type CadastroSignUpProps = {
 export function CadastroSignUp({ onRegister }: CadastroSignUpProps) {
   return (
     <Container>
-      <div className="leftContent">
       <div className="logoWrapper">
-        <img src={Logo} alt="Logo da Luma" />
-      </div>
+          <img src={Logo} alt="Logo da Luma" />
+        </div>
+        
+      <div className="leftContent">
         <div className="formHeader">
           <h1>Crie sua conta</h1>
           <p>Preencha os campos para se cadastrar.</p>

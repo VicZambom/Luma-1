@@ -8,6 +8,8 @@ import { Divider } from '@mui/material';
 import Logo from '../../assets/LogoFudida.png'
 import { useNavigate } from 'react-router-dom';
 
+import { Link } from 'react-router-dom'
+
 type LoginSignUpProps = {
   onLogin: (msg: string) => void;
 };
@@ -71,7 +73,9 @@ export function LoginSignUp({ onLogin }: LoginSignUpProps) {
                     <span>ou</span>
                 </Divider>
                 <CenterFocusWeakOutlinedIcon className='photoIcon'/>
-                <p className='registerTextArea'>Não possui uma conta? <a href="#">Cadastre-se</a></p>
+                <p className='registerTextArea'>
+                    Não possui uma conta? <Link to="/cadastro">Cadastre-se</Link>
+                  </p>
               </div>
 
               <footer className='loginFooter'>

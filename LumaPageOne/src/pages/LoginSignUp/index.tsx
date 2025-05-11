@@ -6,14 +6,26 @@ import Button from '@mui/material/Button';
 import CenterFocusWeakOutlinedIcon from '@mui/icons-material/CenterFocusWeakOutlined';
 import { Divider } from '@mui/material';
 import Logo from '../../assets/LogoFudida.png'
+import { useNavigate } from 'react-router-dom';
 
 type LoginSignUpProps = {
   onLogin: (msg: string) => void;
 };
 
+
+
+
 export function LoginSignUp({ onLogin }: LoginSignUpProps) {
+    const navigate = useNavigate()
+
+    const handleLogin = () => {
+      onLogin('Usuário Logado!');
+      navigate('/SideBarPages')
+    }
+    
     return (
-        <Container>         
+        <Container> 
+                  
           <LeftImageSection />
       
           <div className="rightContent">
@@ -45,9 +57,10 @@ export function LoginSignUp({ onLogin }: LoginSignUpProps) {
             </form>
 
             <Button
+              
                     fullWidth
                     variant="contained"
-                    onClick={() => onLogin('Usuário Logado!')}
+                    onClick={handleLogin}
                     className="loginButton"
                 >
                     Vamos lá!

@@ -2,9 +2,13 @@ import { ThemeProvider } from "styled-components";
 import { LoginSignUp } from "./pages/LoginSignUp";
 import { defaultTheme } from "./styles/themes/default";
 import { GlobalStyle } from "./styles/global";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import { PersistentDrawerLeft } from "./components/SideBarPages";
 import { CadastroSignUp } from "./pages/CadastroSignUp";
+import { RegistrarPonto } from "./pages/Ponto/RegistrarPonto";
+import { PontoHome } from "./pages/Ponto/Ponto";
+import { DefaultLayout } from "./components/MainLayout/DefaultLayout";
 
 export function App() {
   const handleLogin = (msg: string) => {
@@ -17,16 +21,20 @@ export function App() {
   return (
     <ThemeProvider theme={defaultTheme}>
       <GlobalStyle />
-      <Router>
+      <BrowserRouter>
         <Routes>
-          <Route path="/" element={<LoginSignUp onLogin={handleLogin} />} />
-          <Route path="/SideBarPages" element={<PersistentDrawerLeft />} />
-          <Route
-            path="/Cadastro"
-            element={<CadastroSignUp onRegister={handleCadastro} />}
-          />
+          <Route path="/" element={<DefaultLayout />}>
+            <Route path="/" element={<LoginSignUp onLogin={handleLogin} />} />
+            <Route path="/SideBarPages" element={<PersistentDrawerLeft />} />
+            <Route
+              path="/Cadastro"
+              element={<CadastroSignUp onRegister={handleCadastro} />}
+            />
+            <Route path="/registrarPonto" element={<RegistrarPonto />} />
+            <Route path="/ponto" element={<PontoHome />} />
+          </Route>
         </Routes>
-      </Router>
+      </BrowserRouter>
     </ThemeProvider>
   );
 }

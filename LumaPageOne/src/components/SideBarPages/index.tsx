@@ -24,11 +24,6 @@ import { useNavigate } from "react-router-dom";
 import Logo from "../../assets/logoLuma.png";
 import { SvgIconComponent } from "@mui/icons-material";
 import { UserCardInfo } from "../UserInfo";
-import {
-  CalendarSection,
-  FrequentItems,
-  MonthlyFrequencyChart,
-} from "../content/HomePageContent";
 
 const drawerWidth = 240;
 
@@ -123,7 +118,7 @@ export function PersistentDrawerLeft() {
   const sideBarItems: SidebarItem[] = [
     { text: "Início", icon: HomeOutlinedIcon, path: "/inicio", color: "white" },
     { text: "Pagamento", icon: WalletOutlinedIcon, path: "/pagamento" },
-    { text: "Ponto", icon: AccessTimeOutlinedIcon, path: "/ponto" },
+    { text: "Ponto", icon: AccessTimeOutlinedIcon, path: "/Ponto" },
     { text: "Férias", icon: WbSunnyOutlinedIcon, path: "/ferias" },
     { text: "Fale com o RH", icon: ChatBubbleOutlineOutlinedIcon, path: "/rh" },
     { text: "Sair", icon: LogoutSharpIcon, path: "/sair" },
@@ -165,11 +160,6 @@ export function PersistentDrawerLeft() {
               <MenuIcon />
             </IconButton>
           </Box>
-
-          {/* Espaço para outros elementos à direita se necessário */}
-          <Box>
-            <Typography>Teste</Typography>
-          </Box>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -183,9 +173,9 @@ export function PersistentDrawerLeft() {
             color: "#fff",
             borderRight: "none",
             boxShadow: "none",
-            position: "fixed", //
-            height: "100vh", //
-            top: 0, //
+            position: "fixed",
+            height: "100vh",
+            top: 0,
           },
         }}
         variant="persistent"
@@ -354,21 +344,6 @@ export function PersistentDrawerLeft() {
               gap: 4,
             }}
           ></Box>
-          <Box sx={{ marginBottom: 2 }}>
-            <FrequentItems />
-            <MonthlyFrequencyChart />
-          </Box>
-        </Box>
-        <Box
-          sx={{
-            flex: { md: 0.4 },
-            width: "100%",
-            position: { md: "sticky" },
-            top: 16,
-            alignSelf: { md: "flex-start" },
-          }}
-        >
-          <CalendarSection />
         </Box>
       </Main>
     </Root>

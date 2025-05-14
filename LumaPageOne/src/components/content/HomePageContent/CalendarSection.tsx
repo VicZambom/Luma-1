@@ -1,7 +1,7 @@
 import { DateCalendar } from "@mui/x-date-pickers";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { Typography, Box } from "@mui/material";
+import { Box } from "@mui/material";
 
 export const CalendarSection = () => (
   <Box
@@ -13,11 +13,13 @@ export const CalendarSection = () => (
       p: 2,
       backgroundColor: "white",
       boxShadow: 1,
+      display: "flex",
+      position: { md: "sticky" },
     }}
   >
-    <Typography variant="h6" gutterBottom sx={{ fontWeight: "bold" }}>
+    {/* <Typography variant="h6" gutterBottom sx={{ fontWeight: "bold" }}>
       Calendário
-    </Typography>
+    </Typography> */}
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DateCalendar
         sx={{

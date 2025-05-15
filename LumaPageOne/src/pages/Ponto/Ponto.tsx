@@ -3,7 +3,7 @@ import { Card, Typography, IconButton, Box } from "@mui/material";
 interface ActionCardProps {
   icon: React.ReactNode;
   title: string;
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 export const PontoHome = ({ icon, title, onClick }: ActionCardProps) => (

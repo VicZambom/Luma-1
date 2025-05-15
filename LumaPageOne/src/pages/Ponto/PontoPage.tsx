@@ -11,6 +11,7 @@ import { Main } from "../../components/SideBarPages";
 import { UserCardInfo } from "../../components/UserInfo";
 import { Greeting } from "../../components/saudacao";
 import { PontoHome } from "./Ponto";
+import { Link } from "react-router";
 
 export const PontoPage = () => {
   const userName = "Carlos";
@@ -30,18 +31,14 @@ export const PontoPage = () => {
     {
       icon: <AccessTimeOutlined sx={{ fontSize: "3rem" }} />,
       title: "Registrar Ponto",
-      onClick: () =>
-        console.log("Registrar Ponto Clicado - Atualizando página"),
     },
     {
       icon: <EditNoteOutlined sx={{ fontSize: "3rem" }} />,
       title: "Solicitar Abono",
-      onClick: () => console.log("Abono Gerado"),
     },
     {
       icon: <PunchClock sx={{ fontSize: "3rem" }} />,
       title: "Espelho de Ponto",
-      onClick: () => console.log("Espelho de Ponto Gerado"),
     },
   ];
 
@@ -56,9 +53,26 @@ export const PontoPage = () => {
 
         <UserCardInfo {...userInfoData} cardWidth="100%" />
 
-        <Box>
+        <Box sx={{ display: "inline-block" }}>
           {pontoHomeItems.map((item, index) => (
-            <PontoHome key={index} {...item} />
+            <Link
+              key={index}
+              to={
+                item.title === "Registrar Ponto"
+                  ? "/app/registrarPonto"
+                  : item.title === "Solicitar Abono"
+                    ? "/app/solicitar-abono"
+                    : "/app/espelho-de-ponto"
+              }
+              style={{
+                textDecoration: "none",
+                color: "inherit",
+                display: "block",
+                width: "100%",
+              }}
+            >
+              <PontoHome {...item} />
+            </Link>
           ))}
         </Box>
       </Main>

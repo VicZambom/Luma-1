@@ -20,7 +20,14 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    "noUncheckedSideEffectImports": true,
+
+    /* Paths for type declarations*/
+
+    "typeRoots": [
+      "./node_modules/@types",
+      "./types" // Adicione esta linha para incluir a pasta 'types' na raiz
+    ]
   },
-  "include": ["src"]
+  "include": ["src", "types/**/*"]
 }

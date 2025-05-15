@@ -19,7 +19,7 @@ export function LoginSignUp({ onLogin }: LoginSignUpProps) {
 
   const handleLogin = () => {
     onLogin("Usuário Logado!");
-    navigate("/inicio");
+    navigate("/app/inicio");
   };
 
   return (

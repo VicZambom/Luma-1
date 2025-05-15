@@ -127,18 +127,18 @@ export function PersistentDrawerLeft({
       {
         text: "Início",
         icon: HomeOutlinedIcon,
-        path: "/inicio",
+        path: "/app/inicio",
         color: "white",
       },
-      { text: "Pagamento", icon: WalletOutlinedIcon, path: "/pagamento" },
-      { text: "Ponto", icon: AccessTimeOutlinedIcon, path: "/Ponto" },
-      { text: "Férias", icon: WbSunnyOutlinedIcon, path: "/ferias" },
+      { text: "Pagamento", icon: WalletOutlinedIcon, path: "/app/pagamento" },
+      { text: "Ponto", icon: AccessTimeOutlinedIcon, path: "/app/ponto" },
+      { text: "Férias", icon: WbSunnyOutlinedIcon, path: "/app/ferias" },
       {
         text: "Fale com o RH",
         icon: ChatBubbleOutlineOutlinedIcon,
-        path: "/rh",
+        path: "/app/rh",
       },
-      { text: "Sair", icon: LogoutSharpIcon, path: "/sair" },
+      { text: "Sair", icon: LogoutSharpIcon, path: "/app/sair" },
     ],
     []
   );

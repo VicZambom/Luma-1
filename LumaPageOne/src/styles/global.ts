@@ -8,17 +8,18 @@ export const GlobalStyle = createGlobalStyle`
 
     :focus {
         outline: 0;
-        box-shadow: 0 0 0 2px ${props => props.theme['gray-100']};
+        box-shadow: 0 0 0 2px ${(props) => props.theme["gray-100"]};
     }
 }
+  html, body { 
+    height: 100%;
+  }
     body {
-        background-color: ${props => props.theme['white']};
-        color: ${props => props.theme['black']};
+        background-color: ${(props) => props.theme["white"]};
+        color: ${(props) => props.theme["black"]};
     }
 
     body, input, textarea, button {
         font-family: 'Poppins', sans-serif;
     }
 `;
-
-

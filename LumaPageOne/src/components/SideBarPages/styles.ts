@@ -3,8 +3,7 @@ import MuiDrawer from "@mui/material/Drawer";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 
-// Certifique-se de que drawerWidth esteja acessível aqui ou importe do index.tsx
-const drawerWidth = 240; // Defina o valor correto
+const drawerWidth = 240;
 
 interface DrawerProps {
   open?: boolean;

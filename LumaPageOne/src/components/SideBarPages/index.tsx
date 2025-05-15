@@ -6,7 +6,6 @@ import CssBaseline from "@mui/material/CssBaseline";
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import List from "@mui/material/List";
-import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -20,14 +19,15 @@ import AccessTimeOutlinedIcon from "@mui/icons-material/AccessTimeOutlined";
 import WbSunnyOutlinedIcon from "@mui/icons-material/WbSunnyOutlined";
 import ChatBubbleOutlineOutlinedIcon from "@mui/icons-material/ChatBubbleOutlineOutlined";
 import LogoutSharpIcon from "@mui/icons-material/LogoutSharp";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import Logo from "../../assets/logoLuma.png";
 import { SvgIconComponent } from "@mui/icons-material";
-import { UserCardInfo } from "../UserInfo";
 
-const drawerWidth = 240;
+const drawerWidth = 230;
 
-const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })<{
+export const Main = styled("main", {
+  shouldForwardProp: (prop) => prop !== "open",
+})<{
   open?: boolean;
 }>(({ theme, open }) => {
   const styles: React.CSSProperties = {
@@ -42,7 +42,6 @@ const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })<{
     position: "relative",
     display: "block",
     marginTop: "64px",
-    // backgroundColor: "#F2F3F5",
     minHeight: "calc(100vh - 64px)",
   };
 
@@ -109,57 +108,76 @@ interface SidebarItem {
   path: string;
   color?: string;
 }
+interface PersistentDrawerLeftProps {
+  open: boolean;
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
-export function PersistentDrawerLeft() {
-  const [open, setOpen] = React.useState(false);
+export function PersistentDrawerLeft({
+  open,
+  setOpen,
+}: PersistentDrawerLeftProps) {
   const navigate = useNavigate();
-  const [selectedIndex, setSelectedIndex] = React.useState(0);
+  // const [selectedIndex, setSelectedIndex] = React.useState(0);
 
-  const sideBarItems: SidebarItem[] = [
-    { text: "Início", icon: HomeOutlinedIcon, path: "/inicio", color: "white" },
-    { text: "Pagamento", icon: WalletOutlinedIcon, path: "/pagamento" },
-    { text: "Ponto", icon: AccessTimeOutlinedIcon, path: "/Ponto" },
-    { text: "Férias", icon: WbSunnyOutlinedIcon, path: "/ferias" },
-    { text: "Fale com o RH", icon: ChatBubbleOutlineOutlinedIcon, path: "/rh" },
-    { text: "Sair", icon: LogoutSharpIcon, path: "/sair" },
-  ];
-  const handleItemClick = (path: string, index: number) => {
+  const location = useLocation();
+
+  const sideBarItems: SidebarItem[] = React.useMemo(
+    () => [
+      {
+        text: "Início",
+        icon: HomeOutlinedIcon,
+        path: "/inicio",
+        color: "white",
+      },
+      { text: "Pagamento", icon: WalletOutlinedIcon, path: "/pagamento" },
+      { text: "Ponto", icon: AccessTimeOutlinedIcon, path: "/Ponto" },
+      { text: "Férias", icon: WbSunnyOutlinedIcon, path: "/ferias" },
+      {
+        text: "Fale com o RH",
+        icon: ChatBubbleOutlineOutlinedIcon,
+        path: "/rh",
+      },
+      { text: "Sair", icon: LogoutSharpIcon, path: "/sair" },
+    ],
+    []
+  );
+  const handleItemClick = (path: string) => {
     navigate(path);
-    setSelectedIndex(index);
+    // setSelectedIndex(index);
     setOpen(false);
   };
+
+  const selectedIndex = React.useMemo(() => {
+    const index = sideBarItems.findIndex((item) =>
+      location.pathname.startsWith(item.path)
+    );
+    return index > -1 ? index : 0;
+  }, [location.pathname, sideBarItems]);
 
   return (
     <Root>
       <CssBaseline />
-      <AppBar open={open}>
+      <AppBar>
         <Toolbar
           sx={{
             justifyContent: "space-between",
+            ml: "11rem",
             background: "transparent",
             boxShadow: "none",
           }}
         >
-          <Box
+          <IconButton
             sx={{
-              display: "flex",
-              alignItems: "center",
-              gap: 2,
+              color: "#5D3998",
+              padding: "8px",
             }}
+            aria-label="open drawer"
+            onClick={() => setOpen(!open)}
+            edge="start"
           >
-            <IconButton
-              sx={{
-                color: "#5D3998",
-                padding: "8px",
-                visibility: "hidden",
-              }}
-              aria-label="open drawer"
-              onClick={() => setOpen(!open)}
-              edge="start"
-            >
-              <MenuIcon />
-            </IconButton>
-          </Box>
+            <MenuIcon />
+          </IconButton>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -182,22 +200,23 @@ export function PersistentDrawerLeft() {
         anchor="left"
         open={open}
       >
-        <DrawerHeader sx={{ backgroundColor: "white", height: "64px" }}>
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              width: "100%",
-              transition: "all 0.3s ease",
-            }}
-          >
-            <img
-              src={Logo}
-              alt="Logo da Luma"
-              height="30"
-              style={{ background: "white" }}
-            />
-          </Box>
+        <DrawerHeader
+          sx={{
+            backgroundColor: "white",
+            height: "64px",
+            display: "flex",
+            alignItems: "center",
+            padding: (theme) => theme.spacing(0, 1),
+            ...(theme) => theme.mixins.toolbar,
+            justifyContent: "center",
+          }}
+        >
+          <img
+            src={Logo}
+            alt="Logo da Luma"
+            height="30"
+            style={{ background: "white" }}
+          />
         </DrawerHeader>
         <Divider />
         <List
@@ -214,7 +233,7 @@ export function PersistentDrawerLeft() {
           {sideBarItems.map((item, index) => (
             <ListItem key={item.text} disablePadding>
               <ListItemButton
-                onClick={() => handleItemClick(item.path, index)}
+                onClick={() => handleItemClick(item.path)}
                 sx={{
                   backgroundColor:
                     selectedIndex === index ? "white" : "transparent",
@@ -256,95 +275,7 @@ export function PersistentDrawerLeft() {
       </Drawer>
 
       <Main open={open}>
-        <Box
-          sx={{
-            padding: open ? "1rem 1.5rem" : "0.5rem 1.5rem 1rem",
-            position: "relative",
-          }}
-        >
-          {!open && (
-            <Box
-              sx={{
-                position: "relative",
-                top: "1rem",
-                paddingBottom: "1.5rem",
-                left: "50%",
-                marginTop: "-3.625rem",
-                transform: "translateX(-50%)",
-                zIndex: 1,
-              }}
-            >
-              <img src={Logo} alt="Logo Luma" height="36" />
-            </Box>
-          )}
-          <Divider sx={{ mb: 3 }} />
-
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              gap: "1rem",
-              marginTop: open ? "0" : "24px", //
-            }}
-          >
-            <IconButton
-              sx={{
-                color: "#5D3998",
-                padding: "8px",
-                marginLeft: "-5px",
-              }}
-              onClick={() => setOpen(!open)}
-            >
-              <MenuIcon />
-            </IconButton>
-
-            <Typography
-              variant="h6"
-              sx={{
-                fontWeight: "bold",
-                color: "#5D3998",
-              }}
-            >
-              Olá, Carlos
-            </Typography>
-          </Box>
-        </Box>
-
-        <Box sx={{ width: "100%", padding: "0 24px" }}>
-          <UserCardInfo
-            name="Carlos Moraes"
-            descricao="QA (Quality Assurance)"
-            avatar="/images/carlos_photo.jpg"
-            entradas={4}
-            saida={3}
-            faltas={0}
-            cardWidth="100%"
-            drawerOpen={open}
-            drawerWidth={drawerWidth}
-          />
-        </Box>
-
-        <Box
-          sx={{
-            width: "50%",
-            padding: "0 24px",
-            display: "flex",
-            flexDirection: { xs: "column", md: "row" },
-            gap: 4,
-            alignItems: "flex-start",
-            mt: 2,
-          }}
-        >
-          <Box
-            sx={{
-              flex: { md: 0.2 },
-              width: "100%",
-              display: "flex",
-              flexDirection: "column",
-              gap: 4,
-            }}
-          ></Box>
-        </Box>
+        <Box></Box>
       </Main>
     </Root>
   );

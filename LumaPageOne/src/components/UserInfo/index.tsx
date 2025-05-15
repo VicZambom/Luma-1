@@ -9,15 +9,15 @@ const UserCardContainer = styled("div")<{ cardWidth: string }>`
     rgba(142, 108, 172, 1) 100%
   );
   height: 10.2rem;
-  padding: 32px 48px;
-  width: 100%;
-  max-width: 100%;
+  padding: 32px 0;
+  width: ${(props) => props.cardWidth};
+  /* max-width: 100%; */
   box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: space-between;
   border-radius: 16px;
-  margin-top: 32px;
+  /* margin-top: 32px; */
 `;
 
 const AvatarImage = styled("img")`
@@ -72,8 +72,6 @@ interface UserInfoProps {
   entradas: number;
   saida: number;
   faltas: number;
-  drawerOpen: boolean;
-  drawerWidth: number;
   cardWidth: string;
   entradasStyle?: React.CSSProperties;
   saidaStyle?: React.CSSProperties;
@@ -86,18 +84,22 @@ export function UserCardInfo({
   entradas,
   saida,
   faltas,
-  drawerOpen,
-  drawerWidth,
+  cardWidth,
   entradasStyle,
   saidaStyle,
   faltasStyle,
 }: UserInfoProps) {
-  const cardWidth = drawerOpen ? `calc(100% - ${drawerWidth}px)` : "100%";
-
   return (
     <UserCardContainer cardWidth={cardWidth}>
       <div style={{ display: "flex", alignItems: "center", width: "100%" }}>
-        <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "1rem",
+            flexGrow: 1,
+          }}
+        >
           <AvatarImage src={avatarPhoto} alt={name} />
           <UserInfoName>
             <NameInfoText>{name}</NameInfoText>

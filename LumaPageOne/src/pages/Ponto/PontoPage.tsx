@@ -11,7 +11,7 @@ import { Main } from "../../components/SideBarPages";
 import { UserCardInfo } from "../../components/UserInfo";
 import { Greeting } from "../../components/saudacao";
 import { PontoHome } from "./Ponto";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 
 export const PontoPage = () => {
   const userName = "Carlos";
